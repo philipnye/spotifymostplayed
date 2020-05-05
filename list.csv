@@ -36,7 +36,7 @@ rank,track,artist,album,streams,release_date,lead_artist_category
 35,Bohemian Rhapsody,Queen,A Night at the Opera,"1,178",31/10/1975,G
 36,All of Me,John Legend,Love in the Future,"1,178",12/08/2013,M
 37,Congratulations,Post Malone featuring Quavo,Stoney,"1,177",04/11/2016,M
-38,Happier,Marshmello and Bastille,Non-album single,"1,168",17/08/2018,MG
+38,Happier,Marshmello and Bastille,,"1,168",17/08/2018,MG
 39,Treat You Better,Shawn Mendes,Illuminate,"1,146",03/06/2016,M
 40,Take Me to Church,Hozier,Hozier,"1,146",13/09/2013,M
 41,Unforgettable,French Montana featuring Swae Lee,Jungle Rules,"1,144",07/04/2017,M
@@ -47,7 +47,7 @@ rank,track,artist,album,streams,release_date,lead_artist_category
 46,Let Her Go,Passenger,All the Little Lights,"1,106",24/02/2012,M
 47,Shallow,Lady Gaga and Bradley Cooper,A Star Is Born,"1,104",27/09/2018,FM
 48,Despacito,Luis Fonsi featuring Daddy Yankee,Vida,"1,103",12/01/2017,M
-49,Cold Water,Major Lazer featuring Justin Bieber and MØ,Non-album single,"1,096",22/07/2016,G
+49,Cold Water,Major Lazer featuring Justin Bieber and MØ,,"1,096",22/07/2016,G
 50,Jocelyn Flores,XXXTentacion,17,"1,086",25/08/2017,M
 51,What Do You Mean?,Justin Bieber,Purpose,"1,086",28/08/2015,M
 52,7 Years,Lukas Graham,Lukas Graham,"1,084",16/06/2015,M
@@ -61,7 +61,7 @@ rank,track,artist,album,streams,release_date,lead_artist_category
 60,Cheerleader - Felix Jaehn Remix Radio Edit,Omi,Me 4 U,"1,033",19/05/2014,M
 61,I Like It,"Cardi B, Bad Bunny and J Balvin",Invasion of Privacy,"1,033",06/04/2018,FMM
 62,Psycho,Post Malone featuring Ty Dolla Sign,Beerbongs & Bentleys,"1,032",23/02/2018,M
-63,This Is What You Came For,Calvin Harris featuring Rihanna,Non-album single,"1,017",29/04/2016,M
+63,This Is What You Came For,Calvin Harris featuring Rihanna,,"1,017",29/04/2016,M
 64,Heathens,Twenty One Pilots,Suicide Squad: The Album,"1,015",16/06/2016,G
 65,Can't Feel My Face,The Weeknd,Beauty Behind the Madness,"1,012",08/06/2015,M
 66,See You Again,Wiz Khalifa featuring Charlie Puth,Furious 7: Original Motion Picture Soundtrack,"1,011",10/03/2015,M
