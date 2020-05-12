@@ -7,6 +7,7 @@ import time
 import math
 import numpy as np
 import pandas as pd
+import matplotlib.pyplot as plot
 from datetime import datetime
 import spotipy
 from spotipy.oauth2 import SpotifyClientCredentials
@@ -76,3 +77,8 @@ for index, row in df.iterrows():
 	if request_count % 5 == 0:
 		time.sleep(np.random.uniform(sleep_min, sleep_max))
 df.to_csv('outputlist.csv', encoding='utf-8-sig')		# specify the encoding so that Windows doesn't assume it's been exported as cp1252
+
+df.head()
+df[['artist', 'lead_artist_category']].groupby('lead_artist_category').count()
+df.loc[(df['lead_artist_category'].str.len() == 1) & (df['lead_artist_category'] != 'G'), ['artist','lead_artist_category']].groupby('lead_artist_category').count()
+df.loc[(df['lead_artist_category'].str.len() == 1) & (df['lead_artist_category'] != 'G'), ['artist','lead_artist_category']].groupby('lead_artist_category').count().plot.barh(rot = 0, title = "Solo top 100 Spotify hits by gender")
