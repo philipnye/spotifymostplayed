@@ -7,6 +7,7 @@ import time
 import math
 import numpy as np
 import pandas as pd
+import seaborn as sns
 import matplotlib.pyplot as plot
 from datetime import datetime
 import spotipy
@@ -79,7 +80,31 @@ for index, row in df.iterrows():
 		time.sleep(np.random.uniform(sleep_min, sleep_max))
 df.to_csv('outputlist.csv', encoding='utf-8-sig')		# specify the encoding so that Windows doesn't assume it's been exported as cp1252
 
+
+## Analysis
 df.head()
+df.dtypes
+
+# Streams
+df[['artist', 'streams']].plot.bar(rot = 0, title = 'Top 100 Spotify hits by streams')
+df['streams'].median()
+df['streams'].max()
+df['streams'].min()
+
+# Gender
 df[['artist', 'lead_artist_category']].groupby('lead_artist_category').count()
 df.loc[(df['lead_artist_category'].str.len() == 1) & (df['lead_artist_category'] != 'G'), ['artist','lead_artist_category']].groupby('lead_artist_category').count()
-df.loc[(df['lead_artist_category'].str.len() == 1) & (df['lead_artist_category'] != 'G'), ['artist','lead_artist_category']].groupby('lead_artist_category').count().plot.barh(rot = 0, title = "Solo top 100 Spotify hits by gender")
+ch1 = df.loc[(df['lead_artist_category'].str.len() == 1) & (df['lead_artist_category'] != 'G'), ['artist','lead_artist_category']].groupby('lead_artist_category').count().plot.barh(rot = 0, title = 'Solo top 100 Spotify hits by gender')
+ch1.get_legend().remove()
+
+# Release year
+ch2 = sns.countplot(df.release_date.dt.year, order = list(range(1975,2021)))		# needs to be one higher than what we actually want to plot
+ch2.set(xlabel = 'Release year', ylabel = '')
+
+# Artist
+a = pd.Series(sum([item for item in df.artists], []))
+df2 = a.groupby(a).size().rename_axis('artist').reset_index(name = 'tally')
+df2.sort_values(['tally', 'artist'], ascending = [False, True]).reset_index(drop = True)
+
+# Collaboration
+df[['artist', 'collaboration']].groupby('collaboration').count()
