@@ -1,7 +1,7 @@
-rank,title,artist,album,streams,release_date,lead_artist_category
+rank,title,artist,album,streams,release_date_wiki,lead_artist_category
 1,Shape of You,Ed Sheeran,÷,"2,475",06/01/2017,M
 2,rockstar,Post Malone featuring 21 Savage,Beerbongs & Bentleys,"1,882",15/09/2017,M
-3,One Dance,Drake featuring Wizkid and Kyla,Views,"1,840",05/04/2016,M
+3,One Dance,Drake featuring WizKid and Kyla,Views,"1,840",05/04/2016,M
 4,Closer,The Chainsmokers featuring Halsey,Collage,"1,757",29/07/2016,G
 5,Thinking Out Loud,Ed Sheeran,×,"1,521",20/06/2014,M
 6,God's Plan,Drake,Scorpion,"1,516",19/01/2018,M
