@@ -29,6 +29,7 @@ def spotify_track_search(row):
 	result = sp.search(q = q_str, type = 'track', limit = 50)
 
 	df.at[index, 'artists'] = []
+	df.at[index, 'spotify_artist_IDs'] = []
 	df['release_date_wiki'] = pd.to_datetime(df['release_date_wiki'], format='%d/%m/%Y')
 	df.at[index, 'release_date'] = datetime.now()
 	df.at[index, 'collaboration'] = collaboration
@@ -39,25 +40,25 @@ def spotify_track_search(row):
 		if track_title.lower() == title.lower():		# in the absence of an exact match functionality in the API search
 			if track_item['album']['release_date_precision'] == 'day':		# some albums only have precision in years or months, not days
 				if datetime.strptime(track_item['album']['release_date'], '%Y-%m-%d') < df.at[index, 'release_date']:
-					df.at[index, 'title'] = track_title
+					df.at[index, 'title'] = track_title		# go with the styling conventions applied in Spotify
 					df.at[index, 'artists'].clear()
+					df.at[index, 'spotify_artist_IDs'].clear()
 					for artist in track_item['artists']:
 						df.at[index, 'artists'].append(artist['name'])
+						df.at[index, 'spotify_artist_IDs'].append(artist['id'])
 					df.at[index, 'album_type'] = track_item['album']['album_type']
 					df.at[index, 'release_date'] = datetime.strptime(track_item['album']['release_date'], '%Y-%m-%d')
-					df.at[index, 'release_date_diff'] = df.at[index, 'release_date'] - df.at[index, 'release_date_wiki']
-					df.at[index, 'release_date_precision'] = track_item['album']['release_date_precision']
 					df.at[index, 'duration_ms'] = track_item['duration_ms']
 			elif track_item['album']['release_date_precision'] == 'year':
 				if int(track_item['album']['release_date']) < df.at[index, 'release_date'].year:
 					df.at[index, 'title'] = track_title
 					df.at[index, 'artists'].clear()
+					df.at[index, 'spotify_artist_IDs'].clear()
 					for artist in track_item['artists']:
 						df.at[index, 'artists'].append(artist['name'])
+						df.at[index, 'spotify_artist_IDs'].append(artist['id'])
 					df.at[index, 'album_type'] = track_item['album']['album_type']
 					df.at[index, 'release_date'] = datetime.strptime(track_item['album']['release_date'], '%Y')
-					df.at[index, 'release_date_diff'] = None
-					df.at[index, 'release_date_precision'] = track_item['album']['release_date_precision']
 					df.at[index, 'duration_ms'] = track_item['duration_ms']
 			else:
 				print(track_title + ' has release date precision of ' + track_item['album']['release_date_precision'])
@@ -76,6 +77,8 @@ def spotify_artist_search(row, artist):
 df = pd.read_csv('list.csv', index_col = 0, encoding = 'cp1252')		# standard Windows encoding
 df['artists'] = None		# add column
 df['artists'] = df['artists'].astype('object')		# set datatype to object, so that artists column can hold a list
+df['spotify_artist_IDs'] = None
+df['spotify_artist_IDs'] = df['spotify_artist_IDs'].astype('object')
 df['primary_artists'] = None
 df['primary_artists'] = df['primary_artists'].astype('object')
 df['contributing_artists'] = None
