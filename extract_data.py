@@ -28,7 +28,7 @@ def spotify_search(row):
 	result = sp.search(q = q_str, type = 'track', limit = 50)
 
 	df.at[index,'artists'] = []
-	df.at[index,'release_date_wiki'] = datetime.strptime(row['release_date_wiki'], "%d/%m/%Y")
+	df['release_date_wiki'] = pd.to_datetime(df['release_date_wiki'], format='%d/%m/%Y')
 	df.at[index,'release_date'] = datetime.now()
 	df.at[index,'collaboration'] = collaboration
 
@@ -37,13 +37,13 @@ def spotify_search(row):
 		item_title=re.split(r' \(with .*\)', item_title)[0]		# handle a couple more cases of collaborators being listed in the track name. Fine until there's a track title that legitimately contains this string pattern...
 		if item_title.lower() == title.lower():		# in the absence of an exact match functionality in the API search
 			if item['album']['release_date_precision'] == 'day':		# some albums only have precision in years or months, not days
-				if datetime.strptime(item['album']['release_date'], "%Y-%m-%d") < df.at[index,'release_date']:
+				if datetime.strptime(item['album']['release_date'], '%Y-%m-%d') < df.at[index,'release_date']:
 					df.at[index,'title'] = item_title
 					df.at[index,'artists'].clear()
 					for artist in item['artists']:
 						df.at[index,'artists'].append(artist['name'])
 					df.at[index,'album_type'] = item['album']['album_type']
-					df.at[index,'release_date'] = datetime.strptime(item['album']['release_date'], "%Y-%m-%d")
+					df.at[index,'release_date'] = datetime.strptime(item['album']['release_date'], '%Y-%m-%d')
 					df.at[index,'release_date_diff'] = df.at[index,'release_date'] - df.at[index,'release_date_wiki']
 					df.at[index,'release_date_precision'] = item['album']['release_date_precision']
 					df.at[index,'duration_ms'] = item['duration_ms']
@@ -54,7 +54,7 @@ def spotify_search(row):
 					for artist in item['artists']:
 						df.at[index,'artists'].append(artist['name'])
 					df.at[index,'album_type'] = item['album']['album_type']
-					df.at[index,'release_date'] = datetime.strptime(item['album']['release_date'], "%Y")
+					df.at[index,'release_date'] = datetime.strptime(item['album']['release_date'], '%Y')
 					df.at[index,'release_date_diff'] = None
 					df.at[index,'release_date_precision'] = item['album']['release_date_precision']
 					df.at[index,'duration_ms'] = item['duration_ms']
