@@ -67,6 +67,7 @@ def spotify_search(row):
 df = pd.read_csv('list.csv', index_col = 0, encoding = 'cp1252')		# standard Windows encoding
 df['artists'] = None		# add column
 df['artists'] = df['artists'].astype('object')		# set datatype to object, so that artists column can hold a listsleep_min = 1
+df['streams'] = pd.to_numeric(df['streams'].str.replace(',', ''))
 sleep_min = 1
 sleep_max = 3
 start_time = time.time()
